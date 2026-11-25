@@ -9,29 +9,29 @@ public class Main {
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		int N = Integer.parseInt(st.nextToken()); // 카드 수
-		int M = Integer.parseInt(st.nextToken()); // 최대 값
 
+		int N = Integer.parseInt(st.nextToken()); // 카드 개수
+		int M = Integer.parseInt(st.nextToken()); // 카드 최대 합
 		int[] arr = new int[N];
-		StringTokenizer cmd = new StringTokenizer(br.readLine());
-		for(int i=0; i<N; i++) { // 카드 각각의 숫자 입력 받기
-			arr[i] = Integer.parseInt(cmd.nextToken());
+
+		// 카드 값 저장
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<N; i++){
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
-		
+
 		int max = 0;
-		
-		for(int i=0; i<N; i++) {
-			for(int j=i+1; j<N; j++) {
-				for(int k=j+1; k<N; k++) {
-					int tmp = arr[i] + arr[j] + arr[k];
-					if(tmp <= M && tmp > max)
-						max = tmp;
-					}
+		int i;
+		int j;
+		int k;
+		for (i=0; i < N - 2; i++) {
+			for (j=i+1; j < N - 1; j++) {
+				for (k=j+1; k < N; k++) {
+					int sum = (arr[i] + arr[j] + arr[k]);
+						if (sum <= M) max = Math.max(max, sum);
 				}
 			}
-		
-		System.out.println(max);
+		}
+		System.out.print(max);
 	}
-
 }
